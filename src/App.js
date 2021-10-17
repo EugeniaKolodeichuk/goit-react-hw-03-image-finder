@@ -62,15 +62,13 @@ class App extends Component {
     this.setState({ isLoading: true, error: '' });
     try {
       const result = await fetchImages(searchItem, page);
-
+      this.scrollToHandler();
       if (result.total !== 0) {
         this.maxPages = Math.ceil(result.totalHits / 12);
 
         this.setState(({ images }) => ({
           images: [...images, ...result.hits],
         }));
-
-        this.scrollToHandler();
       } else {
         toast.info(`Nothing found for ${searchItem}`);
         this.setState(() => ({
