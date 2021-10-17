@@ -51,10 +51,14 @@ class App extends Component {
   };
 
   scrollToHandler = () => {
-    window.scrollTo({
-      top: document.documentElement.scrollHeight,
-      behavior: 'smooth',
-    });
+    const top = document.documentElement.scrollHeight - 150;
+
+    setTimeout(() => {
+      window.scrollTo({
+        top,
+        behavior: 'smooth',
+      });
+    }, 500);
   };
 
   searchImagesHandler = async () => {
@@ -62,7 +66,7 @@ class App extends Component {
     this.setState({ isLoading: true, error: '' });
     try {
       const result = await fetchImages(searchItem, page);
-      this.scrollToHandler();
+
       if (result.total !== 0) {
         this.maxPages = Math.ceil(result.totalHits / 12);
 
@@ -84,6 +88,7 @@ class App extends Component {
   };
 
   loadMoreHandler = () => {
+    this.scrollToHandler();
     this.setState(() => ({
       page: Math.min(this.maxPages, this.state.page + 1),
     }));
