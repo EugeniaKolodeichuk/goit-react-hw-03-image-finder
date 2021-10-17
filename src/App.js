@@ -74,7 +74,7 @@ class App extends Component {
           images: [...images, ...result.hits],
         }));
       } else {
-        toast.info(`Nothing found for ${searchItem}`);
+        toast.info(`Nothing found for ${searchItem}!`);
         this.setState(() => ({
           images: [],
         }));
