@@ -32,12 +32,12 @@ class App extends Component {
     ) {
       this.searchImagesHandler();
     }
-    if (
+    /* if (
       prevState.images.length !== this.state.images.length &&
       prevState.images.length !== 0
     ) {
       this.scrollToHandler();
-    }
+    } */
   }
 
   closeModal = () => {
@@ -51,12 +51,10 @@ class App extends Component {
   };
 
   scrollToHandler = () => {
-    setTimeout(() => {
-      window.scrollTo({
-        top: document.documentElement.scrollHeight,
-        behavior: 'smooth',
-      });
-    }, 750);
+    window.scrollTo({
+      top: document.documentElement.scrollHeight,
+      behavior: 'smooth',
+    });
   };
 
   searchImagesHandler = async () => {
@@ -71,6 +69,8 @@ class App extends Component {
         this.setState(({ images }) => ({
           images: [...images, ...result.hits],
         }));
+
+        this.scrollToHandler();
       } else {
         toast.info(`Nothing found for ${searchItem}`);
         this.setState(() => ({
